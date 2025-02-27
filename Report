@@ -1,0 +1,45 @@
+Analysis of Football Data 
+ 
+Summary 
+This report provides an in-depth analysis of football data using Python libraries such as NumPy, Pandas, Matplotlib, and Seaborn. The study involves handling numerical data, creating arrays, and performing data manipulation for football players' statistics from the FIFA dataset. 
+The analysis begins with an overview of NumPy, a fundamental package for numerical computing. It demonstrates the creation of single-dimensional and multi-dimensional arrays and initializing arrays with zeros. Following this, Pandas is introduced for data manipulation, covering Series and DataFrame structures, which are essential for organizing and analyzing large datasets. 
+The report then delves into FIFA player data, loading and exploring a dataset containing various attributes of football players. The nationality distribution of players is analyzed and visualized using bar plots to identify the most represented countries. The report further examines player salaries, highlighting the highest-paid footballers and visualizing salary comparisons. 
+A specific focus is given to German football players, where players are ranked based on height, weight, and wages. Additionally, the shooting and defending skills of players are evaluated to determine top-performing athletes in these categories. 
+A case study on Real Madrid players is also conducted, examining their salaries, shooting, and defending abilities. The nationality distribution within the club is analyzed to understand the diversity of players. 
+Overall, this study provides insights into football player statistics, showcasing how data manipulation and visualization techniques can be used to analyze and interpret sports data effectively. 
+NumPy Overview 
+NumPy stands for Numerical Python and is a fundamental package for scientific computing in Python. 
+Creating NumPy Arrays Single-dimensional Array import numpy as np n1 = np.array([10, 20, 30, 40]) n1 
+Multi-dimensional Array import numpy as np n2 = np.array([[10, 20, 30, 40], [40, 30, 20, 10]]) n2 type(n2) 
+Initializing NumPy Arrays with Zeros import numpy as np n1 = np.zeros((1,2)) n1 
+ 
+n2 = np.zeros((5,5)) n2 
+Python Pandas Overview 
+Pandas stands for Panel Data and is the core library for data manipulation and analysis. 
+Pandas Data Structures 
+•	Single-dimensional: Series Object 
+•	Multi-dimensional: DataFrame 
+Pandas Series Object 
+A Series Object is a one-dimensional labeled array. import pandas as pd s1 = pd.Series([1, 2, 3, 4, 5]) s1 type(s1) 
+Creating a DataFrame d1 = pd.DataFrame({"Name": ['Bob', 'Sam', 'Anne'], "Marks": [76, 25, 92]}) d1 
+Loading Required Libraries import pandas as pd from matplotlib import pyplot as plt import seaborn as sns Loading and Exploring FIFA Data fifa = pd.read_csv('players_20.csv') fifa.head() 
+Displaying Column Names 
+for col in fifa.columns:     print(col) 
+Shape of the Dataset fifa.shape Nationality Analysis fifa['nationality'].value_counts() fifa['nationality'].value_counts()[0:10] fifa['nationality'].value_counts()[0:5].keys() Visualizing Nationality Data plt.figure(figsize=(8,5)) plt.bar(list(fifa['nationality'].value_counts()[0:5].keys()),          list(fifa['nationality'].value_counts()[0:5]),          color=["blue", "green", "red", "pink", "orange"]) plt.show() 
+Player Salary Analysis player_salary = fifa[['short_name', 'wage_eur']] player_salary = player_salary.sort_values(by=['wage_eur'], ascending=False) Visualizing Top Salaries plt.figure(figsize=(8,5)) plt.bar(list(player_salary['short_name'])[0:5],          list(player_salary['wage_eur'])[0:5],          color=["blue", "green", "red", "pink", "orange"]) plt.show() 
+Germany Player Analysis 
+Germany = fifa[fifa['nationality'] == 'Germany'] 
+Germany.head(10) 
+Sorting Germany Players 
+Germany.sort_values(by=['height_cm'], ascending=False).head() 
+Germany.sort_values(by=['weight_kg'], ascending=False).head() 
+Germany.sort_values(by=['wage_eur'], ascending=False).head() 
+Germany[['short_name', 'wage_eur']].sort_values(by=['wage_eur'], ascending=False).head() Player Shooting and Defending Analysis player_shooting = fifa[['short_name', 'shooting']] player_shooting.sort_values(by=['shooting'], ascending=False).head() 
+ 
+player_defending = fifa[['short_name', 'defending']] player_defending.sort_values(by=['defending'], ascending=False).head() Real Madrid Player Analysis real_madrid = fifa[fifa['club'] == 'Real Madrid'] real_madrid.sort_values(by=['wage_eur'], ascending=False).head() real_madrid.sort_values(by=['shooting'], ascending=False).head() real_madrid.sort_values(by=['defending'], ascending=False).head() 
+Nationality Distribution in Real Madrid 
+real_madrid['nationality'].value_counts() 
+This analysis provides insights into football player statistics, salaries, and performance metrics based on FIFA data. 
+ 
+ 
+This project analyzes football data using NumPy and Pandas, focusing on player statistics from FIFA 20. It demonstrates NumPy arrays for numerical operations and Pandas for data manipulation. The dataset is explored by examining player nationalities, salaries, shooting, and defending skills. Visualizations using Matplotlib and Seaborn highlight key insights, such as toppaid players and country-wise player distribution. Specific analyses include sorting German players by height, weight, and salary, as well as evaluating Real Madrid’s squad based on performance metrics. The project provides a structured approach to handling large football datasets for in-depth analysis and insights. 
